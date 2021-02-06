@@ -1,0 +1,31 @@
+@font-face {
+  font-family: "Roboto mono";
+  src: url("../fonts/RobotoMono-Light.ttf");
+  font-weight: 300;
+  font-size: normal;
+}
+
+@font-face {
+  font-family: "Roboto mono";
+  src: url("../fonts/RobotoMono-Regular.ttf");
+  font-weight: 400;
+  font-size: normal;
+}
+
+@font-face {
+  font-family: "Roboto mono";
+  src: url("../fonts/RobotoMono-Bold.ttf");
+  font-weight: 700;
+  font-size: normal;
+}
+
+@font-face {
+  font-family: "PressStart";
+  src: url("../fonts/PressStart2P-Regular.ttf");
+}
+
+$theme-colors: (
+  "primary": #e5e619,
+  "secondary": #FF468B,
+  "info": #00E3FF
+);

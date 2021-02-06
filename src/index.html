@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>aliceandbob.io</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  </head>
+
+  <body>
+    <div id="content">
+      <div id="nav">
+        <div class="nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-generate-tab" data-toggle="pill" href="#v-pills-generate" role="tab" aria-controls="v-pills-generate" aria-selected="true">
+            <span class="material-icons">vpn_key</span>
+          </a>
+          <a class="nav-link" id="v-pills-encrypt-tab" data-toggle="pill" href="#v-pills-encrypt" role="tab" aria-controls="v-pills-encrypt" aria-selected="false">
+            <span class="material-icons">lock</span>
+          </a>
+          <a class="nav-link" id="v-pills-decrypt-tab" data-toggle="pill" href="#v-pills-decrypt" role="tab" aria-controls="v-pills-decrypt" aria-selected="false">
+            <span class="material-icons">lock_open</span>
+          </a>
+        </div>
+      </div>
+      <div id="main">
+        <div class="container-fluid">
+          <nav class="navbar navbar-dark mb-3">
+            <a href="https://aliceandbob.io" target="_blank" class="navbar-brand">
+              <span class="d-block d-sm-none">
+                a<span class="text-primary shift">&</span>b<span class="text-primary shift">.</span><span class="text-primary shift">io</span>
+              </span>
+              <span class="d-none d-sm-block">
+                alice<span class="text-primary shift">and</span>bob<span class="text-primary shift">.</span><span class="text-primary shift">io</span>
+              </span>
+            </a>
+            <div>
+              <a href="https://twitter.com/aliceandbob_io" target="_blank" class="nav-link">
+                <i class="fab fa-twitter fa-lg"></i>
+              </a>
+              <a href="https://github.com/aliceandbob-io/aliceandbob-desktop" target="_blank" class="nav-link">
+                <i class="fab fa-github fa-lg"></i>
+              </a>
+            </div>
+          </nav>
+          <div id="page">
+            <div class="tab-content" id="v-pills-tabContent">
+              <div class="tab-pane fade show active" id="v-pills-generate" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                <fieldset data-controller="keys" class="mb-5">
+                  <legend>Generate a PGP key pair</legend>
+                  <div class="row d-none error bg-danger rounded p-3 mb-4" data-target="keys.error">
+                    <span>An error has occured. Please verify the submitted data or try again later.</span>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col">
+                      <div class="form-group mb-3">
+                        <label>Email</label>
+                        <input type="email" class="form-control" data-target="keys.emailParams" placeholder="email@example.com" value="">
+                      </div>
+                      <div class="form-group mb-3">
+                        <label>Passphrase</label>
+                        <div class="mb-2"><small class="text-muted">There is no way to recover your passphrase so be sure not to forget it.</small></div>
+                        <div class="input-group">
+                          <input type="password" class="form-control" data-target="keys.passphraseParams" placeholder="a-str0ng_p@ssphras€!">
+                          <div class="input-group-append" data-action="click->keys#showPassphrase">
+                            <a class="input-group-text">
+                              <span class="material-icons">
+                                visibility_off
+                              </span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button data-action="click->keys#generate" data-target="keys.generateButton" type="submit" class="btn btn-primary btn-lg">
+                    <span class="mr-3">Generate</span>
+                    <span class="material-icons icon-fix">vpn_key</span>
+                    <span class="spinner-border icon-fix spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                  </button>
+                  <br>
+                  <br>
+                  <div class="row d-none" data-target="keys.initialState">
+                    <div class="col-lg-6">
+                      <label>Public key</label>
+                      <span class="material-icons md-light copy public-key" data-action="click->keys#copyToClipboard">content_copy</span>
+                      <span class="copy-badge badge badge-light d-none">Copied!</span>
+                      <div class="custom-textarea" spellcheck="false" contentEditable="true" data-target="keys.publicKey"></div>
+                      <a href="#" class="download" data-action="click->keys#downloadKey" data-type="public">
+                        <span class="material-icons mr-3">save</span>Download public key
+                      </a>
+                    </div>
+                    <div class="col-lg-6">
+                      <label>Private key</label>
+                      <span class="material-icons md-light copy private-key" data-action="click->keys#copyToClipboard">content_copy</span>
+                      <span class="copy-badge badge badge-light d-none">Copied!</span>
+                      <div class="custom-textarea" spellcheck="false" contentEditable="true" data-target="keys.privateKey"></div>
+                      <a href="#" class="download" data-action="click->keys#downloadKey" data-type="private">
+                        <span class="material-icons mr-3">save</span>Download private key
+                      </a>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="tab-pane fade" id="v-pills-encrypt" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                <fieldset data-controller="encrypt" class="mb-5">
+                  <legend>Encrypt a message</legend>
+                  <div class="row d-none error bg-danger rounded p-3 mb-4" data-target="encrypt.error">
+                    <span>An error has occured. Please verify the submitted data or try again later.</span>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                      <label>Text to encrypt</label>
+                      <div class="custom-textarea" spellcheck="false" contentEditable="true" data-target="encrypt.input"></div>
+                    </div>
+                    <div class="col-lg-6">
+                      <label>Public PGP key of the receiver</label>
+                      <div class="custom-textarea" spellcheck="false" contentEditable="true" data-target="encrypt.key"></div>
+                    </div>
+                  </div>
+                  <button data-action="click->encrypt#encrypt" data-target="encrypt.encryptButton" type="button" class="btn btn-primary btn-lg">
+                    <span class="mr-3">Encrypt</span>
+                    <span class="material-icons icon-fix">lock</span>
+                    <span class="spinner-border icon-fix spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                  </button>
+                  <br>
+                  <br>
+                  <br>
+                  <div class="row d-none" data-target="encrypt.initialState">
+                    <div class="col-lg-6">
+                      <label>Your encrypted message</label>
+                      <span class="material-icons md-light copy" data-action="click->encrypt#copyToClipboard">content_copy</span>
+                      <span class="copy-badge badge badge-light d-none">Copied!</span>
+                      <div class="custom-textarea output" spellcheck="false" contentEditable="true" data-target="encrypt.output"></div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="tab-pane fade" id="v-pills-decrypt" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                <fieldset data-controller="decrypt" class="mb-5">
+                  <legend>Decrypt a message</legend>
+                  <div class="row d-none error bg-danger rounded p-3 mb-4" data-target="decrypt.error">
+                    <span>An error has occured. Please verify the submitted data or try again later.</span>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label>Text to decrypt</label>
+                        <div class="custom-textarea" spellcheck="false" contentEditable="true" data-target="decrypt.input"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Your PGP private key</label>
+                        <div class="custom-textarea" spellcheck="false" contentEditable="true" data-target="decrypt.key"></div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group mt-3">
+                        <label>Passphrase</label>
+                        <div class="input-group">
+                          <input type="password" class="form-control" data-target="decrypt.passphrase">
+                          <div class="input-group-append" data-action="click->decrypt#showPassphrase">
+                            <a class="input-group-text">
+                              <span class="material-icons">
+                                visibility_off
+                              </span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button data-action="click->decrypt#decrypt" data-target="decrypt.decryptButton" type="button" class="btn btn-primary btn-lg">
+                    <span class="mr-3">Decrypt</span>
+                    <span class="material-icons icon-fix">lock_open</span>
+                    <span class="spinner-border icon-fix spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                  </button>
+                  <br>
+                  <br>
+                  <br>
+                  <div class="row d-none" data-target="decrypt.initialState">
+                    <div class="col">
+                      <label>Your decrypted message</label>
+                      <span class="material-icons md-light copy" data-action="click->decrypt#copyToClipboard">content_copy</span>
+                      <span class="copy-badge badge badge-light d-none">Copied!</span>
+                      <div class="custom-textarea output" spellcheck="false" contentEditable="true" data-target="decrypt.output"></div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <footer class=text-center>
+            <div class="mb-5">
+              <a href="https://twitter.com/aliceandbob_io" target="_blank" class="mr-3 text-decoration-none">
+                <i class="fab fa-twitter fa-lg"></i>
+              </a>
+              <a href="https://github.com/aliceandbob-io/aliceandbob-desktop" target="_blank" class="mr-3 text-decoration-none">
+                <i class="fab fa-github fa-lg"></i>
+              </a>
+              <a href="mailto:hello@aliceandbob.io" class="mr-3 text-decoration-none">
+                <i class="fas fa-envelope fa-lg"></i>
+              </a>
+              <a href="https://www.buymeacoffee.com/aliceandbobio" target="_blank" clas="text-decoration-none">
+                <i class="fas fa-donate fa-lg"></i>
+              </a>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                Proudly based on <a href="https://openpgpjs.org/"target="_blank">Openpgp.js</a> 🚀
+              </div>
+              <div class="col-md-6">
+                Coded with ❤️ and ☕
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

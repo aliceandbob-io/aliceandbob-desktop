@@ -1,0 +1,59 @@
+{
+  "name": "aliceandbob.io",
+  "productName": "aliceandbob.io",
+  "version": "1.0.0-Beta.1",
+  "description": "A free, light and easy to use PGP tool based on OpenPGP.js.",
+  "main": "./.webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": {
+    "name": "theolazian"
+  },
+  "license": "MIT",
+  "config": {
+    "forge": "./forge.config.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "@electron-forge/plugin-webpack": "^6.0.0-beta.54",
+    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "@popperjs/core": "^2.6.0",
+    "autoprefixer": "^10.2.1",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^4.2.1",
+    "electron": "^11.2.1",
+    "file-loader": "^6.2.0",
+    "jquery": "^3.5.1",
+    "material-design-icons": "^3.0.1",
+    "node-loader": "^1.0.1",
+    "node-sass": "^5.0.0",
+    "popper.js": "^1.16.1",
+    "postcss": "^8.2.4",
+    "postcss-loader": "^4.1.0",
+    "sass": "^1.32.4",
+    "sass-loader": "^10.1.1",
+    "stimulus": "^2.0.0",
+    "style-loader": "^1.2.1",
+    "url-loader": "^4.1.1",
+    "webpack": "^4.0.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.2",
+    "bootstrap": "^4.6.0",
+    "electron-squirrel-startup": "^1.0.0"
+  }
+}
