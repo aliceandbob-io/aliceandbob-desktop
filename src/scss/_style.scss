@@ -235,6 +235,11 @@ fieldset {
   scrollbar-width: thin;
 }
 
+select option {
+  background: black;
+  color: #fff;
+}
+
 .material-icons, .spinner-border {
   font-size: 24px;
   vertical-align: middle;

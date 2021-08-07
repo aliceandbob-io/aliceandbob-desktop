@@ -3,7 +3,7 @@ import { generateKey } from '../js/crypto.js';
 import { download, copy, showPass } from "../js/index.js";
 
 export default class extends Controller {
-  static targets = ["emailParams", "passphraseParams", "privateKey", "publicKey", "initialState", "generateButton", "error"];
+  static targets = ["emailParams", "passphraseParams", "curveParams", "privateKey", "publicKey", "initialState", "generateButton", "error"];
 
   async generate(e) {
     // Initial display
@@ -11,6 +11,7 @@ export default class extends Controller {
     this.initialStateTarget.classList.add("d-none");
     this.emailParamsTarget.classList.remove("border-danger");
     this.passphraseParamsTarget.classList.remove("border-danger");
+    this.curveParamsTarget.classList.remove("border-danger");
     this.errorTarget.classList.add("d-none");
 
     // Validation form
@@ -20,7 +21,10 @@ export default class extends Controller {
     if (this.passphraseParamsTarget.value == "") {
       this.passphraseParamsTarget.classList.add("border-danger");
     }
-    if (this.emailParamsTarget.value == "" || this.passphraseParamsTarget.value == "") {
+    if (this.curveParamsTarget.value == "") {
+      this.curveParamsTarget.classList.add("border-danger");
+    }
+    if (this.emailParamsTarget.value == "" || this.passphraseParamsTarget.value == "" || this.curveParamsTarget.value == "") {
       return
     }
 
@@ -32,8 +36,9 @@ export default class extends Controller {
     // Params
     const emailParams = this.emailParamsTarget.value;
     const passphraseParams = this.passphraseParamsTarget.value;
+    const curveParams = this.curveParamsTarget.value;
 
-    const key = await generateKey(emailParams, passphraseParams).catch((err) => { console.error(err); });
+    const key = await generateKey(emailParams, passphraseParams, curveParams).catch((err) => { console.error(err); });
 
     if (key) {
       this.privateKeyTarget.innerText = key.privateKeyArmored;

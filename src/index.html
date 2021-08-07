@@ -71,6 +71,21 @@
                           </div>
                         </div>
                       </div>
+                      <div class="form-group mb-3">
+                       <label>Curve encryption</label>
+                       <div class="mb-2"><small class="text-muted">Choose the type of encryption for your key pair.</small></div>
+                       <select class="form-control" data-target="keys.curveParams">
+                         <option value="curve25519">curve25519</option>
+                         <option value="ed25519">ed25519</option>
+                         <option value="p256">p256</option>
+                         <option value="p384">p384</option>
+                         <option value="p521">p521</option>
+                         <option value="brainpoolP256r1">brainpoolP256r1</option>
+                         <option value="brainpoolP384r1">brainpoolP384r1</option>
+                         <option value="brainpoolP512r1">brainpoolP512r1</option>
+                         <option value="secp256k1">secp256k1</option>
+                       </select>
+                     </div>
                     </div>
                   </div>
                   <button data-action="click->keys#generate" data-target="keys.generateButton" type="submit" class="btn btn-primary btn-lg">

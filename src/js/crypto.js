@@ -2,13 +2,14 @@ export async function loadPGP() {
   await import("./openpgp.js");
 }
 
-export async function generateKey(emailParams, passphraseParams) {
+export async function generateKey(emailParams, passphraseParams, curveParams) {
   await loadPGP();
   const name = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   const email = emailParams;
   const passphrase = passphraseParams;
+  const curve = curveParams;
   return await openpgp.generateKey({
-    curve: "curve25519",
+    curve: curveParams,
     userIds: [{ name: name, email: email }],
     passphrase: passphrase,
   });
