@@ -6,7 +6,7 @@ A free, light and easy to use desktop app to generate PGP key pairs, encrypt and
 
 ## Download it ⬇️
 
-- From the repo's Github page: [releases](https://github.com/aliceandbob-io/aliceandbob-desktop/releases)
+- From the repo's Github page: [releases]( https://www.electronjs.org/apps/aliceandbob-io)
 - From [aliceandbobio](https://aliceandbob.io/)
 
 ## Installation
