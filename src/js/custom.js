@@ -1,3 +1,5 @@
+const $ = require('jquery')
+
 $(document).ready(function(){
   console.log('👋 This message is being logged by "custom.js"');
   $(function () {
