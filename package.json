@@ -1,7 +1,11 @@
 {
   "name": "aliceandbob.io",
   "productName": "aliceandbob.io",
+<<<<<<< HEAD
   "version": "1.0.0",
+=======
+  "version": "1.1.0-Beta.2",
+>>>>>>> afbf4a2fddd24ad4e1693b3a25b0afb15fb26862
   "description": "A free, light and easy to use PGP tool based on OpenPGP.js.",
   "main": "./.webpack/main",
   "scripts": {
@@ -57,7 +61,11 @@
     "@fortawesome/fontawesome-free": "^5.15.2",
     "bootstrap": "^4.6.0",
     "electron-squirrel-startup": "^1.0.0",
+<<<<<<< HEAD
     "expose-loader": "^3.1.0",
     "material-icons": "^1.11.2"
+=======
+    "expose-loader": "^3.1.0"
+>>>>>>> afbf4a2fddd24ad4e1693b3a25b0afb15fb26862
   }
 }
