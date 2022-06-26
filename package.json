@@ -1,7 +1,7 @@
 {
   "name": "aliceandbob.io",
   "productName": "aliceandbob.io",
-  "version": "1.0.0-Beta.2",
+  "version": "1.0.0",
   "description": "A free, light and easy to use PGP tool based on OpenPGP.js.",
   "main": "./.webpack/main",
   "scripts": {
@@ -24,10 +24,10 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
-    "@electron-forge/cli": "^6.0.0-beta.63",
-    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/cli": "^6.0.0-beta.64",
+    "@electron-forge/maker-deb": "^6.0.0-beta.64",
     "@electron-forge/maker-rpm": "^6.0.0-beta.63",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.64",
     "@electron-forge/maker-zip": "^6.0.0-beta.63",
     "@electron-forge/plugin-webpack": "^6.0.0-beta.58",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
@@ -39,9 +39,9 @@
     "electron": "^11.2.1",
     "file-loader": "^6.2.0",
     "jquery": "^3.6.0",
-    "material-design-icons": "^3.0.1",
     "node-loader": "^1.0.1",
     "node-sass": "^5.0.0",
+    "openpgp": "^5.3.0",
     "popper.js": "^1.16.1",
     "postcss": "^8.2.4",
     "postcss-loader": "^4.1.0",
@@ -53,9 +53,11 @@
     "webpack": "^4.0.0"
   },
   "dependencies": {
+    "@electron/get": "^1.14.1",
     "@fortawesome/fontawesome-free": "^5.15.2",
     "bootstrap": "^4.6.0",
     "electron-squirrel-startup": "^1.0.0",
-    "expose-loader": "^3.1.0"
+    "expose-loader": "^3.1.0",
+    "material-icons": "^1.11.2"
   }
 }

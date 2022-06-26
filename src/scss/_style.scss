@@ -40,7 +40,7 @@ body {
 
 .navbar-brand {
   margin-right: 0px;
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'PressStart', cursive;
   font-size: 1.5em;
   &:hover {
     color: $my-primary !important;
@@ -194,7 +194,7 @@ fieldset {
   border-radius: 8px;
   padding: 25px;
   legend {
-    font-weight: 400;
+    font-weight: 700;
   }
   label {
     font-weight: 700;
@@ -244,6 +244,11 @@ select option {
   font-size: 24px;
   vertical-align: middle;
   position: relative;
+}
+
+// Fix electron app
+.download > .material-icons {
+  width: 24px;
 }
 
 .icon-fix {

@@ -48,20 +48,20 @@
               <div class="tab-pane fade show active" id="v-pills-generate" role="tabpanel" aria-labelledby="v-pills-home-tab">
                 <fieldset data-controller="keys" class="mb-5">
                   <legend>Generate a PGP key pair</legend>
-                  <div class="row d-none error bg-danger rounded p-3 mb-4" data-target="keys.error">
+                  <div class="row d-none error bg-danger rounded p-3 mb-4" data-keys-target="error">
                     <span>An error has occured. Please verify the submitted data or try again later.</span>
                   </div>
                   <div class="row mb-3">
                     <div class="col">
                       <div class="form-group mb-3">
                         <label>Email</label>
-                        <input type="email" class="form-control" data-target="keys.emailParams" placeholder="email@example.com" value="">
+                        <input type="email" class="form-control" data-keys-target="emailParams" placeholder="email@example.com" value="">
                       </div>
                       <div class="form-group mb-3">
                         <label>Passphrase</label>
                         <div class="mb-2"><small class="text-muted">There is no way to recover your passphrase so be sure not to forget it.</small></div>
                         <div class="input-group">
-                          <input type="password" class="form-control" data-target="keys.passphraseParams" placeholder="a-str0ng_p@ssphras€!">
+                          <input type="password" class="form-control" data-keys-target="passphraseParams" placeholder="a-str0ng_p@ssphras€!">
                           <div class="input-group-append" data-action="click->keys#showPassphrase">
                             <a class="input-group-text">
                               <span class="material-icons">
@@ -73,45 +73,56 @@
                       </div>
                       <div class="form-group mb-3">
                        <label>Curve encryption</label>
-                       <div class="mb-2"><small class="text-muted">Choose the type of encryption for your key pair.</small></div>
-                       <select class="form-control" data-target="keys.curveParams">
+                       <div><small class="text-muted">Choose the type of encryption for your key pair.</small></div>
+                       <div class="mb-2"><small class="text-muted">Brainpool and secp256k1 curves are no longer supported. <a href="https://github.com/openpgpjs/openpgpjs/pull/1395" target="_blank">See more</a></small></div>
+                       <select class="form-control" data-keys-target="curveParams">
                          <option value="curve25519">curve25519</option>
                          <option value="ed25519">ed25519</option>
                          <option value="p256">p256</option>
                          <option value="p384">p384</option>
                          <option value="p521">p521</option>
-                         <option value="brainpoolP256r1">brainpoolP256r1</option>
-                         <option value="brainpoolP384r1">brainpoolP384r1</option>
-                         <option value="brainpoolP512r1">brainpoolP512r1</option>
-                         <option value="secp256k1">secp256k1</option>
+                         <!-- Curves deprecated with openpgp.js v.5.0.0 -->
+                         <!-- See https://github.com/openpgpjs/openpgpjs/pull/1395 -->
+                         <!--
+                           <option value="brainpoolP256r1">brainpoolP256r1</option>
+                           <option value="brainpoolP384r1">brainpoolP384r1</option>
+                           <option value="brainpoolP512r1">brainpoolP512r1</option>
+                           <option value="secp256k1">secp256k1</option>
+                         -->
                        </select>
                      </div>
                     </div>
                   </div>
-                  <button data-action="click->keys#generate" data-target="keys.generateButton" type="submit" class="btn btn-primary btn-lg">
+                  <button data-action="click->keys#generate" data-keys-target="generateButton" type="submit" class="btn btn-primary btn-lg">
                     <span class="mr-3">Generate</span>
                     <span class="material-icons icon-fix">vpn_key</span>
                     <span class="spinner-border icon-fix spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                   </button>
                   <br>
                   <br>
-                  <div class="row d-none" data-target="keys.initialState">
+                  <div class="row d-none" data-keys-target="initialState">
                     <div class="col-lg-6">
                       <label>Public key</label>
                       <span class="material-icons md-light copy public-key" data-action="click->keys#copyToClipboard">content_copy</span>
                       <span class="copy-badge badge badge-light d-none">Copied!</span>
-                      <div class="custom-textarea" spellcheck="false" contentEditable="true" data-target="keys.publicKey"></div>
-                      <a href="#" class="download" data-action="click->keys#downloadKey" data-type="public">
-                        <span class="material-icons mr-3">save</span>Download public key
+                      <div class="custom-textarea" spellcheck="false" contentEditable="true" data-keys-target="publicKey"></div>
+                      <a href="#" class="btn btn-outline-primary btn-sm download mr-3" data-action="click->keys#downloadKey" data-type="public" data-format="txt">
+                        <span class="material-icons align-top">save_alt</span>.txt
+                      </a>
+                      <a href="#" class="btn btn-outline-primary btn-sm download" data-action="click->keys#downloadKey" data-type="public" data-format="asc">
+                        <span class="material-icons align-top">save_alt</span>.asc
                       </a>
                     </div>
                     <div class="col-lg-6">
                       <label>Private key</label>
                       <span class="material-icons md-light copy private-key" data-action="click->keys#copyToClipboard">content_copy</span>
                       <span class="copy-badge badge badge-light d-none">Copied!</span>
-                      <div class="custom-textarea" spellcheck="false" contentEditable="true" data-target="keys.privateKey"></div>
-                      <a href="#" class="download" data-action="click->keys#downloadKey" data-type="private">
-                        <span class="material-icons mr-3">save</span>Download private key
+                      <div class="custom-textarea" spellcheck="false" contentEditable="true" data-keys-target="privateKey"></div>
+                      <a href="#" class="btn btn-outline-primary btn-sm download mr-3" data-action="click->keys#downloadKey" data-type="private" data-format="txt">
+                        <span class="material-icons align-top">save_alt</span>.txt
+                      </a>
+                      <a href="#" class="btn btn-outline-primary btn-sm download" data-action="click->keys#downloadKey" data-type="private" data-format="asc">
+                        <span class="material-icons align-top">save_alt</span>.asc
                       </a>
                     </div>
                   </div>
@@ -120,20 +131,20 @@
               <div class="tab-pane fade" id="v-pills-encrypt" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                 <fieldset data-controller="encrypt" class="mb-5">
                   <legend>Encrypt a message</legend>
-                  <div class="row d-none error bg-danger rounded p-3 mb-4" data-target="encrypt.error">
+                  <div class="row d-none error bg-danger rounded p-3 mb-4" data-encrypt-target="error">
                     <span>An error has occured. Please verify the submitted data or try again later.</span>
                   </div>
                   <div class="row mb-3">
                     <div class="col-lg-6">
                       <label>Text to encrypt</label>
-                      <div class="custom-textarea" spellcheck="false" contentEditable="true" data-target="encrypt.input"></div>
+                      <div class="custom-textarea" spellcheck="false" contentEditable="true" data-encrypt-target="input"></div>
                     </div>
                     <div class="col-lg-6">
                       <label>Public PGP key of the receiver</label>
-                      <div class="custom-textarea" spellcheck="false" contentEditable="true" data-target="encrypt.key"></div>
+                      <div class="custom-textarea" spellcheck="false" contentEditable="true" data-encrypt-target="key"></div>
                     </div>
                   </div>
-                  <button data-action="click->encrypt#encrypt" data-target="encrypt.encryptButton" type="button" class="btn btn-primary btn-lg">
+                  <button data-action="click->encrypt#encrypt" data-encrypt-target="encryptButton" type="button" class="btn btn-primary btn-lg">
                     <span class="mr-3">Encrypt</span>
                     <span class="material-icons icon-fix">lock</span>
                     <span class="spinner-border icon-fix spinner-border-sm d-none" role="status" aria-hidden="true"></span>
@@ -141,12 +152,12 @@
                   <br>
                   <br>
                   <br>
-                  <div class="row d-none" data-target="encrypt.initialState">
+                  <div class="row d-none" data-encrypt-target="initialState">
                     <div class="col-lg-6">
                       <label>Your encrypted message</label>
                       <span class="material-icons md-light copy" data-action="click->encrypt#copyToClipboard">content_copy</span>
                       <span class="copy-badge badge badge-light d-none">Copied!</span>
-                      <div class="custom-textarea output" spellcheck="false" contentEditable="true" data-target="encrypt.output"></div>
+                      <div class="custom-textarea output" spellcheck="false" contentEditable="true" data-encrypt-target="output"></div>
                     </div>
                   </div>
                 </fieldset>
@@ -154,23 +165,23 @@
               <div class="tab-pane fade" id="v-pills-decrypt" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                 <fieldset data-controller="decrypt" class="mb-5">
                   <legend>Decrypt a message</legend>
-                  <div class="row d-none error bg-danger rounded p-3 mb-4" data-target="decrypt.error">
+                  <div class="row d-none error bg-danger rounded p-3 mb-4" data-decrypt-target="error">
                     <span>An error has occured. Please verify the submitted data or try again later.</span>
                   </div>
                   <div class="row mb-3">
                     <div class="col-lg-6">
                         <label>Text to decrypt</label>
-                        <div class="custom-textarea" spellcheck="false" contentEditable="true" data-target="decrypt.input"></div>
+                        <div class="custom-textarea" spellcheck="false" contentEditable="true" data-decrypt-target="input"></div>
                     </div>
                     <div class="col-lg-6">
                         <label>Your PGP private key</label>
-                        <div class="custom-textarea" spellcheck="false" contentEditable="true" data-target="decrypt.key"></div>
+                        <div class="custom-textarea" spellcheck="false" contentEditable="true" data-decrypt-target="key"></div>
                     </div>
                     <div class="col">
                       <div class="form-group mt-3">
                         <label>Passphrase</label>
                         <div class="input-group">
-                          <input type="password" class="form-control" data-target="decrypt.passphrase">
+                          <input type="password" class="form-control" data-decrypt-target="passphrase">
                           <div class="input-group-append" data-action="click->decrypt#showPassphrase">
                             <a class="input-group-text">
                               <span class="material-icons">
@@ -182,7 +193,7 @@
                       </div>
                     </div>
                   </div>
-                  <button data-action="click->decrypt#decrypt" data-target="decrypt.decryptButton" type="button" class="btn btn-primary btn-lg">
+                  <button data-action="click->decrypt#decrypt" data-decrypt-target="decryptButton" type="button" class="btn btn-primary btn-lg">
                     <span class="mr-3">Decrypt</span>
                     <span class="material-icons icon-fix">lock_open</span>
                     <span class="spinner-border icon-fix spinner-border-sm d-none" role="status" aria-hidden="true"></span>
@@ -190,12 +201,12 @@
                   <br>
                   <br>
                   <br>
-                  <div class="row d-none" data-target="decrypt.initialState">
+                  <div class="row d-none" data-decrypt-target="initialState">
                     <div class="col">
                       <label>Your decrypted message</label>
                       <span class="material-icons md-light copy" data-action="click->decrypt#copyToClipboard">content_copy</span>
                       <span class="copy-badge badge badge-light d-none">Copied!</span>
-                      <div class="custom-textarea output" spellcheck="false" contentEditable="true" data-target="decrypt.output"></div>
+                      <div class="custom-textarea output" spellcheck="false" contentEditable="true" data-decrypt-target="output"></div>
                     </div>
                   </div>
                 </fieldset>
@@ -218,10 +229,13 @@
               </a>
             </div>
             <div class="row">
-              <div class="col-md-6">
-                Proudly based on <a href="https://openpgpjs.org/"target="_blank">Openpgp.js</a> 🚀
+              <div class="col-md-4 mb-3">
+                Proudly based on <a href="https://openpgpjs.org/" target="_blank">Openpgp.js</a> 🚀
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4 mb-3">
+                ⚖️ Under <a href="https://github.com/aliceandbob-io/aliceandbob-desktop/blob/master/LICENSE.md" target="_blank">MIT License</a>
+              </div>
+              <div class="col-md-4 mb-3">
                 Coded with ❤️ and ☕
               </div>
             </div>

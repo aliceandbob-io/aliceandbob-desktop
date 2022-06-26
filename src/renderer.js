@@ -8,7 +8,6 @@ import './scss/app.scss';
 
 // Import js files
 import './js/custom.js';
-import './js/openpgp.js';
 
 // FONTAWESOME
 import "@fortawesome/fontawesome-free/js/all";

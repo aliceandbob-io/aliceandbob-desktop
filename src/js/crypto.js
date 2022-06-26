@@ -1,42 +1,44 @@
-export async function loadPGP() {
-  await import("./openpgp.js");
-}
+import {
+  generateKey,
+  readKeys,
+  encrypt,
+  readMessage,
+  readPrivateKey,
+  decryptKey,
+  decrypt,
+  createMessage
+} from 'openpgp';
 
-export async function generateKey(emailParams, passphraseParams, curveParams) {
-  await loadPGP();
+export async function generateMyKeys(emailParams, passphraseParams, curveParams) {
   const name = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   const email = emailParams;
   const passphrase = passphraseParams;
   const curve = curveParams;
-  return await openpgp.generateKey({
+  return await generateKey({
     curve: curveParams,
-    userIds: [{ name: name, email: email }],
-    passphrase: passphrase,
+    userIDs: [{ name: name, email: email }],
+    passphrase: passphrase
   });
 }
 
-export async function encryptText(text, key) {
-  await loadPGP();
-  const message = openpgp.message.fromText(text);
-  const publicKeyArmored = key;
+export async function encryptText(text, armoredKeys) {
+  const publicKeys = await readKeys({ armoredKeys });
 
-  const { data: encrypted } = await openpgp.encrypt({
-    message: message,
-    publicKeys: (await openpgp.key.readArmored(publicKeyArmored)).keys
+  const encrypted = await encrypt({
+    message: await createMessage({ text }),
+    encryptionKeys: publicKeys
   });
 
   return encrypted;
 }
 
-export async function decryptText(text, key, passphrase) {
-  await loadPGP();
-  const privateKeyArmored = key;
-  const { keys: [privateKey] } = await openpgp.key.readArmored(privateKeyArmored);
-  await privateKey.decrypt(passphrase);
+export async function decryptText(armoredMessage, armoredKey, passphrase) {
+  const privateKey = await readPrivateKey({ armoredKey });
+  const decryptedPrivateKey = await decryptKey({ privateKey, passphrase });
 
-  const { data: decrypted } = await openpgp.decrypt({
-      message: await openpgp.message.readArmored(text),
-      privateKeys: [privateKey]
+  const { data: decrypted } = await decrypt({
+      message: await readMessage({ armoredMessage }),
+      decryptionKeys: decryptedPrivateKey
   });
 
   return decrypted;
