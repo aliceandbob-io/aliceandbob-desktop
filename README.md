@@ -2,12 +2,10 @@
 
 A free, light and easy to use desktop app to generate PGP key pairs, encrypt and decrypt messages. The desktop app works fully offline to ensure maximum security to the user.
 
-**⚡ Looking for the online PGP tool from aliceandbob.io instead? Go [here](https://aliceandbob.io/online-pgp-tool) or on its [GitHub's page](https://github.com/aliceandbob-io/aliceandbob).**
-
 ## Download it ⬇️
 
 - From the repo's Github page: [releases](https://github.com/aliceandbob-io/aliceandbob-desktop/releases)
-- From [aliceandbobio](https://aliceandbob.io/)
+- From [aliceandbob.io](https://aliceandbob.io/)
 - From [electronjs.org page](https://www.electronjs.org/apps/aliceandbob-io)
 
 ## Installation
@@ -30,7 +28,7 @@ A free, light and easy to use desktop app to generate PGP key pairs, encrypt and
 
 ## Library 📚
 
-OpenPGP.js (v4.10.7), a JavaScript implementation of the OpenPGP protocol. Find out more on [openpgpjs.org](https://openpgpjs.org/).
+OpenPGP.js (v5.3.0), a JavaScript implementation of the OpenPGP protocol. Find out more on [openpgpjs.org](https://openpgpjs.org/).
 
 ## Contributing 🍰
 
