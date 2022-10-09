@@ -32,7 +32,7 @@ module.exports = {
     [
       "@electron-forge/plugin-webpack",
       {
-        mainConfig: "./webpack.main.config.js",
+        devContentSecurityPolicy: `default-src 'self' 'unsafe-inline' data:; script-src 'self' 'unsafe-eval' 'unsafe-inline' data:`,
         renderer: {
           config: "./webpack.renderer.config.js",
           entryPoints: [
@@ -42,7 +42,8 @@ module.exports = {
               name: "main_window"
             }
           ]
-        }
+        },
+        mainConfig: "./webpack.main.config.js"
       }
     ]
   ]

@@ -1,5 +1,5 @@
 import { Controller } from "stimulus";
-import { generateKey } from '../js/crypto.js';
+import { generateMyKeys } from '../js/crypto.js';
 import { download, copy, showPass } from "../js/index.js";
 
 export default class extends Controller {
@@ -38,11 +38,11 @@ export default class extends Controller {
     const passphraseParams = this.passphraseParamsTarget.value;
     const curveParams = this.curveParamsTarget.value;
 
-    const key = await generateKey(emailParams, passphraseParams, curveParams).catch((err) => { console.error(err); });
+    const key = await generateMyKeys(emailParams, passphraseParams, curveParams).catch((err) => { console.error(err); });
 
     if (key) {
-      this.privateKeyTarget.innerText = key.privateKeyArmored;
-      this.publicKeyTarget.innerText = key.publicKeyArmored;
+      this.privateKeyTarget.innerText = key.privateKey;
+      this.publicKeyTarget.innerText = key.publicKey;
       this.initialStateTarget.classList.remove("d-none");
       this.errorTarget.classList.add("d-none");
       $([document.documentElement, document.body]).animate({
@@ -88,19 +88,27 @@ export default class extends Controller {
   downloadKey(e) {
     e.preventDefault();
     let type = e.currentTarget.dataset.type;
+    let format = e.currentTarget.dataset.format;
     if (type == "public") {
       const text = this.publicKeyTarget.innerText;
-      download(text, "txt", "A&B - Public Key");
+      if (format == "asc") {
+        download(text, "text/asc", "aliceandbob.io - Public Key.asc");
+      } else {
+        download(text, "text/txt", "aliceandbob.io - Public Key.txt");
+      }
     } else if (type == "private") {
       const text = this.privateKeyTarget.innerText;
-      download(text, "txt", "A&B - Private Key");
+      if (format == "asc") {
+        download(text, "text/asc", "aliceandbob.io - Private Key.asc");
+      } else {
+        download(text, "text/txt", "aliceandbob.io - Private Key.txt");
+      }
     } else {
-      download("Let's hope you didn't have any bad intention by doing so ;)", "txt", "Well try");
+      download("Let's hope you didn't have any bad intention by doing so ;)", "txt", "Well tried");
       this.errorTarget.classList.remove("d-none");
       $([document.documentElement, document.body]).animate({
         scrollTop: 0
       }, 1000);
     }
-
   }
 }

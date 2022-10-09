@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  console.log('👋 This message is being logged by "custom.js"');
   $(function () {
     $('[data-toggle="popover"]').popover()
   })
